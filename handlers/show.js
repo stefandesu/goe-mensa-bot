@@ -14,7 +14,7 @@ function handler({ user }) {
     inline_keyboard: [
       [
         {
-          text: util.backText,
+          text: util.getLabel(util.backText, user.language),
           callback_data: "/menu"
         }
       ]

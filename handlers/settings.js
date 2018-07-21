@@ -61,11 +61,11 @@ function handler(meta, command) {
           ],
           [
             {
-              text: util.getLabel(labels.pricesText, lang) + priceType.title[language._id],
+              text: util.getLabel(labels.pricesText, lang) + util.getLabel(priceType.title, lang),
               callback_data: "/settings" + util.divider + "togglePriceType"
             },
             {
-              text: util.backText,
+              text: util.getLabel(util.backText, lang),
               callback_data: "/menu"
             }
           ]

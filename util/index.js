@@ -7,6 +7,9 @@ module.exports = {
   divider: "&&",
   sendMode: "SEND",
   editMode: "EDIT",
-  backText: "«",
+  backText: {
+    de: "« zurück",
+    en: "« back"
+  },
   getLabel,
 }
