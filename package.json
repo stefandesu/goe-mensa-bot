@@ -1,0 +1,19 @@
+{
+  "name": "goe-mensa-bot",
+  "version": "0.1.0",
+  "description": "A Telegram bot for canteens at the University of Göttingen, Germany.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefandesu/goe-mensa-bot.git"
+  },
+  "author": "Stefan Peters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefandesu/goe-mensa-bot/issues"
+  },
+  "homepage": "https://github.com/stefandesu/goe-mensa-bot#readme"
+}
