@@ -18,7 +18,7 @@ const labels = {
     en: "Show"
   },
   notifyText: {
-    de: "Benachrichten",
+    de: "Benachrichtigen",
     en: "Notify"
   },
   settingsText: {
