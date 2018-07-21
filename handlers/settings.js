@@ -8,8 +8,8 @@ const labels = {
     en: "Settings:"
   },
   enabledText: {
-    de: "Bot eingeschaltet: ",
-    en: "Bot enabled: "
+    de: "Aktiviert: ",
+    en: "Enabled: "
   },
   languageText: {
     de: "Sprache: ",

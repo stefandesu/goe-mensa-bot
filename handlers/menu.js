@@ -59,12 +59,12 @@ function handler({ fromMain, user }) {
       ],
       [
         {
-          text: util.getLabel(labels.settingsText, lang),
-          callback_data: "/settings"
-        },
-        {
           text: util.getLabel(labels.helpText, lang),
           callback_data: "/help"
+        },
+        {
+          text: util.getLabel(labels.settingsText, lang),
+          callback_data: "/settings"
         }
       ]
     ]
