@@ -1,6 +1,41 @@
 # Göttingen Mensa Bot
 
-An upcoming Telegram bot for the canteens of the University of Göttingen. A current prototype is available as [@GoeMensaBot](https://t.me/GoeMensaBot), but will be completely rewritten using [goe-mensa-api](https://github.com/stefandesu/goe-mensa-api).
+An upcoming Telegram bot for the canteens of the University of Göttingen. A older prototype is available as [@GoeMensaBot](https://t.me/GoeMensaBot), but will be completely rewritten using [goe-mensa-api](https://github.com/stefandesu/goe-mensa-api).
+
+Current tests will be run with [@GoeMensaDevBot](https://t.me/GoeMensaDevBot), but it might not always be available.
+
+## Installation
+
+To install and run the bot on your own device, you'll need a MongoDB server and Node.js. Note that it currently uses [goe-mensa-api](https://github.com/stefandesu/goe-mensa-api)'s database directly, so you'll need to run that as well.
+
+```bash
+# Clone repository
+git clone https://github.com/stefandesu/goe-mensa-bot.git
+cd goe-mensa-bot
+
+# Install dependencies
+npm install
+
+# Create .env file
+touch .env
+# See below for more info on the .env file
+
+# Run the dev server
+npm run dev
+```
+
+`.env` example file (for defaults see `bot.js`):
+
+```
+MONGO_URL=localhost
+MONGO_DB=goe-mensa-api
+MONGO_PORT=27017
+MONGO_USER=mongoadmin
+MONGO_PASS=mongopass
+TELEGRAM_TOKEN=123456789:abcdefghijkl...xyz
+```
+
+Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 
 ## Planned Features/Commands
 
