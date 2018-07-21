@@ -74,7 +74,8 @@ function callbackHandler({ data, message, fromMain }) {
           },
           parse_mode: "Markdown",
           message_id: message.message_id,
-          chat_id: message.chat.id
+          chat_id: message.chat.id,
+          disable_web_page_preview: true,
         }
         // If coming from main, editing is not possible.
         if (mode == util.editMode && fromMain) {
