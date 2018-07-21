@@ -58,6 +58,8 @@ All data will be saved in a MongoDB collection named `users`. A `user` has the f
 
 - `_id` - integer (Telegram user_id)
 - `enabled` - bool
+- `language` - string (interface and dishes language, default `de`)
+- `priceType` - string (which prices to show, default `stu`)
 - `subscriptions` - array of strings (category ids)
 - `subscriptionTime` - integer? (time to send subscriptions)
 - `subscriptionDays` - array of integers (days of the week to send subscriptions, 0 = Sunday)
@@ -71,6 +73,7 @@ Example for a user object (maybe someone who is vegetarian and gluten intolerant
   "_id": 12345,
   "enabled": true,
   "language": "de",
+  "priceType": "stu",
   "subscriptions": [
     "z_menu1",
     "z_menu2",
