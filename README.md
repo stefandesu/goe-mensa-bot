@@ -93,3 +93,6 @@ Example for a user object (maybe someone who is vegetarian and gluten intolerant
   ]
 }
 ```
+
+## How To Use
+TODO
