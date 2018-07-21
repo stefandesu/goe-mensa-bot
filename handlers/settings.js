@@ -98,5 +98,5 @@ function togglePriceType({ db, user, priceTypes }) {
 
 module.exports = {
   handler,
-  command: "/settings"
+  commands: ["/settings"]
 }

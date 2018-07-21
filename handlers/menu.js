@@ -74,5 +74,5 @@ function handler({ fromMain, user }) {
 
 module.exports = {
   handler,
-  command: "/menu"
+  commands: ["/menu", "/start"]
 }

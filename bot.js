@@ -19,7 +19,9 @@ const
 
 let db, commandHandlers = {}
 for (let handler of handlers) {
-  commandHandlers[handler.command] = handler.handler
+  for (let command of handler.commands) {
+    commandHandlers[command] = handler.handler
+  }
 }
 
 const labels = {
