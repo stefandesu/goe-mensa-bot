@@ -39,8 +39,8 @@ Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 
 ## Planned Features/Commands
 
-- [ ] `/menu` - show a menu with all commands (to minimizing actual typing)
-- [ ] `/enable` or `/disable` - enable or disable the daily notification
+- [x] `/menu` - show a menu with all commands (to minimizing actual typing)
+- [x] `/settings` - change the language, price type, or enable/disable the bot
 - [ ] `/show` - show dishes for a particular day
 - [ ] `/subscribe` - subscribe certain categories of dishes and get them every day
   - [ ] basic subscribing and unsubscribing
