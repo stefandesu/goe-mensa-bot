@@ -70,11 +70,12 @@ Example for a user object (maybe someone who is vegetarian and gluten intolerant
 {
   "_id": 12345,
   "enabled": true,
+  "language": "de",
   "subscriptions": [
     "z_menu1",
     "z_menu2",
     "z_vegetarisch",
-    "z_vegan"
+    "z_vegan",
     "t_vegetarisch",
     "t_vegan"
   ],
