@@ -85,7 +85,9 @@ function callbackHandler({ data, message, fromMain }) {
         if (mode == util.sendMode) {
           bot.sendMessage(message.chat.id, text, options)
         } else if (mode == util.editMode) {
-          bot.editMessageText(text, options)
+          // editMode deleted previous messages and then sends the message
+          bot.deleteMessage(message.chat.id, message.message_id)
+          bot.sendMessage(message.chat.id, text, options)
         }
       })
     })
