@@ -1,6 +1,10 @@
 const util = require("../util")
 
 const labels = {
+  startText: {
+    de: "Willkommen beim Göttingen Mensa Bot von @stefandesu!\n\n",
+    en: "Welcome to the Göttingen Mensa Bot by @stefandesu!\n\n"
+  },
   text: {
     de: "Wähle eine Option:",
     en: "Choose an option:"
@@ -31,10 +35,10 @@ const labels = {
   },
 }
 
-function handler({ fromMain, user }) {
+function handler({ fromMain, user, command }) {
   let lang = user.language
   let messages = [{
-    text: util.getLabel(labels.text, lang),
+    text: `${command == "/start" ? util.getLabel(labels.startText, lang) : ""}${util.getLabel(labels.text, lang)}`,
     mode: fromMain ? util.sendMode : util.editMode,
     inline_keyboard: [
       [
