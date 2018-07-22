@@ -26,8 +26,8 @@ const labels = {
     en: "Settings"
   },
   helpText: {
-    de: "Hilfe",
-    en: "Help"
+    de: "Info",
+    en: "Info"
   },
 }
 
@@ -60,7 +60,7 @@ function handler({ fromMain, user }) {
       [
         {
           text: util.getLabel(labels.helpText, lang),
-          callback_data: "/help"
+          callback_data: "/info"
         },
         {
           text: util.getLabel(labels.settingsText, lang),
