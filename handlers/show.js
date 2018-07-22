@@ -147,8 +147,20 @@ function showDishes({ db, user }, date, mensa) {
           let dish = dishes.find(d => d.category == category._id)
           if (!dish) continue
           let categoryTitle = category.labels[0]
-          dishTitle = util.getLabel(dish.title, user.language)
-          text += `\n*${categoryTitle}:* ${dishTitle} (${dish.additives.join(",")})`
+          let dishTitle = util.getLabel(dish.title, user.language)
+          let price
+          try {
+            price = dish.prices[user.priceType].toFixed(2)
+          } catch(error) {
+            price = "?"
+          }
+          let additives = ""
+          if (dish.additives.length > 0 && dish.additives[0] != "") {
+            additives = ` (${dish.additives.join(",")})`
+          }
+          console.log(dish.additives, dish.additives.length, additives)
+          price = price.replace(".", ",")
+          text += `\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
         }
         inline_keyboard.push(keyboardBack)
         return [{
