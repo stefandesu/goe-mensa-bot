@@ -97,12 +97,7 @@ function chooseDate({ db, user }, returnNext = false) {
 function chooseMensa({ db, user }, date) {
   // Show list of mensen
   return db.collection("mensen").find().sort({ order: 1 }).toArray().then(mensen => {
-    let inline_keyboard = [[
-      {
-        text: util.getLabel(labels.chooseDateMenu, user.language),
-        callback_data: "/show" + util.divider + "CHOOSE"
-      }
-    ]]
+    let inline_keyboard = [[]]
     for (let mensa of mensen) {
       if (inline_keyboard[inline_keyboard.length - 1].length >= 2) {
         inline_keyboard.push([])
@@ -113,6 +108,9 @@ function chooseMensa({ db, user }, date) {
       })
     }
     inline_keyboard.push([{
+      text: util.getLabel(labels.chooseDateMenu, user.language),
+      callback_data: "/show" + util.divider + "CHOOSE"
+    },{
       text: util.getLabel(util.backText, user.language),
       callback_data: "/menu"
     }])
