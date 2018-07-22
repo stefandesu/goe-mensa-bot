@@ -2,7 +2,7 @@
 
 An upcoming Telegram bot for the canteens of the University of Göttingen. A older prototype is available as [@GoeMensaBot](https://t.me/GoeMensaBot), but will be completely rewritten using [goe-mensa-api](https://github.com/stefandesu/goe-mensa-api).
 
-Current tests will be run with [@GoeMensaDevBot](https://t.me/GoeMensaDevBot), but it might not always be available.
+Current tests are running on [@GoeMensaDevBot](https://t.me/GoeMensaDevBot), but it might not always be available.
 
 ## Installation
 
@@ -41,7 +41,7 @@ Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 
 - [x] `/menu` - show a menu with all commands (to minimizing actual typing)
 - [x] `/settings` - change the language, price type, or enable/disable the bot
-- [ ] `/show` - show dishes for a particular day
+- [x] `/show` - show dishes for a particular day
 - [ ] `/subscribe` - subscribe certain categories of dishes and get them every day
   - [ ] basic subscribing and unsubscribing
   - [ ] list all subscriptions
@@ -50,8 +50,8 @@ Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 - [ ] `/filter` - filters for subscribed dishes
   - [ ] filter out additives
   - [ ] filter out dish types
-- [ ] `/notify` - get separate notifications for certain keywords (e.g. your favorites dishes)
-- [ ] `/info` or `/help` - show a detailed help screen
+- [ ] `/favorites` - save favorite dishes and get notified if they are available
+- [x] `/info` or `/help` - show a help/info screen
 
 ## Internal Data Structure
 All data will be saved in a MongoDB collection named `users`. A `user` has the following properties:
@@ -95,4 +95,24 @@ Example for a user object (maybe someone who is vegetarian and gluten intolerant
 ```
 
 ## How To Use
-TODO
+When you first start the bot, you'll see the main menu. This is the entry point for all features of the bot. The following options are available:
+
+### Mensa Menu
+See what's available in a mensa on a given day. By default, the current day (or the next possible day) will be selected, but you can change the date as well. Note that at this point, dishes data is only available two days in advance.
+
+When you choose a mensa, all available dishes will be shown. Note that a mensa may be closed during certain times, e.g. on Saturdays or during the summer holidays.
+
+### Subscribe
+You can subscribe to your favorite dish categories. Every day, you'll get a message with all subscribed dishes.
+
+### Favorites
+You can also save keywords for your favorite dishes. If one of those is available on a given day, you'll receive a separate message for it!
+
+### Filter
+If you are allergic to certain additives or can't or don't want to eat certain types of foods, you can filter them out here. These filters are only applied to your subscriptions, not when going through the Mensa Menu.
+
+### Info
+Some infos about the bot and links to GitHub.
+
+### Settings
+You can change some settings, like enable or disable the bot, change the language, or change the price type.
