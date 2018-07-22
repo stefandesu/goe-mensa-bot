@@ -158,7 +158,6 @@ function showDishes({ db, user }, date, mensa) {
           if (dish.additives.length > 0 && dish.additives[0] != "") {
             additives = ` (${dish.additives.join(",")})`
           }
-          console.log(dish.additives, dish.additives.length, additives)
           price = price.replace(".", ",")
           text += `\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
         }
