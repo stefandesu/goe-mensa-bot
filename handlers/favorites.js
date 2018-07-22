@@ -2,8 +2,8 @@ const util = require("../util")
 
 const labels = {
   text: {
-    de: "Benachrichtigungen noch nicht implementiert.",
-    en: "Notify not yet implemented."
+    de: "Favoriten noch nicht implementiert.",
+    en: "Favorites not yet implemented."
   }
 }
 
@@ -25,5 +25,5 @@ function handler({ user }) {
 
 module.exports = {
   handler,
-  commands: ["/notify"]
+  commands: ["/favorites"]
 }

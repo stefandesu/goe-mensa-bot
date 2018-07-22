@@ -3,7 +3,7 @@ const settings = require("./settings")
 const filter = require("./filter")
 const subscribe = require("./subscribe")
 const show = require("./show")
-const notify = require("./notify")
+const favorites = require("./favorites")
 const help = require("./help")
 
 module.exports = [
@@ -12,6 +12,6 @@ module.exports = [
   filter,
   subscribe,
   show,
-  notify,
+  favorites,
   help
 ]

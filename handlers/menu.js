@@ -14,12 +14,12 @@ const labels = {
     en: "Filter"
   },
   showText: {
-    de: "Anzeigen",
-    en: "Show"
+    de: "Mensa-Menü",
+    en: "Mensa Menu"
   },
-  notifyText: {
-    de: "Benachrichtigen",
-    en: "Notify"
+  favoritesText: {
+    de: "Favoriten",
+    en: "Favorites"
   },
   settingsText: {
     de: "Einstellungen",
@@ -39,22 +39,22 @@ function handler({ fromMain, user }) {
     inline_keyboard: [
       [
         {
-          text: util.getLabel(labels.subscribeText, lang),
-          callback_data: "/subscribe"
-        },
-        {
-          text: util.getLabel(labels.filterText, lang),
-          callback_data: "/filter"
-        }
-      ],
-      [
-        {
           text: util.getLabel(labels.showText, lang),
           callback_data: "/show"
         },
         {
-          text: util.getLabel(labels.notifyText, lang),
-          callback_data: "/notify"
+          text: util.getLabel(labels.subscribeText, lang),
+          callback_data: "/subscribe"
+        }
+      ],
+      [
+        {
+          text: util.getLabel(labels.favoritesText, lang),
+          callback_data: "/favorites"
+        },
+        {
+          text: util.getLabel(labels.filterText, lang),
+          callback_data: "/filter"
         }
       ],
       [
