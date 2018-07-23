@@ -4,6 +4,7 @@ const mongoClient = require("mongodb").MongoClient
 const util = require("./util")
 const handlers = require("./handlers")
 const users = require("./lib/users")
+const api = require("./lib/api")
 require("dotenv").config()
 
 const
@@ -49,8 +50,16 @@ function mainHandler(message) {
 }
 
 function callbackHandler({ data, message, fromMain }) {
+  let mensen, categories, user
   // 1. Get user
-  users.get(db, message.chat.id).then(user => {
+  users.get(db, message.chat.id).then(result => {
+    user = result
+    return api.getMensen(db)
+  }).then(results => {
+    mensen = results
+    return api.getCategories(db)
+  }).then(results => {
+    categories = results
     // 2. Assemble meta object
     let [command, ...args] = data.split(util.divider)
     let meta = {
@@ -58,7 +67,9 @@ function callbackHandler({ data, message, fromMain }) {
       user,
       message,
       command,
-      fromMain: fromMain ? true : false
+      fromMain: fromMain ? true : false,
+      mensen,
+      categories,
     }
     // 3. Determine and run handler
     let handler = commandHandlers[command]

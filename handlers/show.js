@@ -1,4 +1,5 @@
 const util = require("../util")
+const api = require("../lib/api")
 
 const labels = {
   today: {
@@ -62,7 +63,7 @@ function chooseDate({ db, user }, returnNext = false) {
   }
   let query = { $or: dateList }
   // Get available dates from database
-  return db.collection("dishes").find(query).sort({ date: 1 }).toArray().then(results => {
+  return api.getDishes(db, query).then(results => {
     if (returnNext && results.length) {
       return results[0].date
     }
@@ -94,38 +95,28 @@ function chooseDate({ db, user }, returnNext = false) {
   })
 }
 
-function chooseMensa({ db, user }, date) {
+function chooseMensa({ user, mensen }, date) {
   // Show list of mensen
-  return db.collection("mensen").find().sort({ order: 1 }).toArray().then(mensen => {
-    let inline_keyboard = [[]]
-    for (let mensa of mensen) {
-      if (inline_keyboard[inline_keyboard.length - 1].length >= 2) {
-        inline_keyboard.push([])
-      }
-      inline_keyboard[inline_keyboard.length - 1].push({
-        text: mensa._id,
-        callback_data: "/show" + util.divider + date + util.divider + mensa._id
-      })
-    }
-    inline_keyboard.push([{
-      text: util.getLabel(labels.chooseDateMenu, user.language),
-      callback_data: "/show" + util.divider + "CHOOSE"
-    },{
-      text: util.getLabel(util.backText, user.language),
-      callback_data: "/menu"
-    }])
-    return [{
-      text: `${util.getLabel(labels.chooseMensa, user.language)}\n(${util.weekdayLabel(date)}, ${date})`,
-      mode: util.editMode,
-      inline_keyboard
-    }]
-  })
+  let prefix = "/show" + util.divider + date
+  let inline_keyboard = api.mensenToKeyboard(mensen, prefix)
+  inline_keyboard.push([{
+    text: util.getLabel(labels.chooseDateMenu, user.language),
+    callback_data: "/show" + util.divider + "CHOOSE"
+  },{
+    text: util.getLabel(util.backText, user.language),
+    callback_data: "/menu"
+  }])
+  return Promise.resolve([{
+    text: `${util.getLabel(labels.chooseMensa, user.language)}\n(${util.weekdayLabel(date)}, ${date})`,
+    mode: util.editMode,
+    inline_keyboard
+  }])
 }
 
-function showDishes({ db, user }, date, mensa) {
+function showDishes({ db, user, categories }, date, mensa) {
   // Show dishes for date and mensa
   let query = { mensa, date }
-  return db.collection("dishes").find(query).toArray().then(dishes => {
+  return api.getDishes(db, query).then(dishes => {
     let keyboardBack = [
       {
         text: util.getLabel(util.backText, user.language),
@@ -141,33 +132,31 @@ function showDishes({ db, user }, date, mensa) {
         inline_keyboard
       }]
     } else {
-      return db.collection("categories").find().sort({ order: 1 }).toArray().then(categories => {
-        let text = `*${util.getLabel(labels.dishes, user.language)} ${mensa} (${util.weekdayLabel(date)}, ${date}):*`
-        for (let category of categories) {
-          let dish = dishes.find(d => d.category == category._id)
-          if (!dish) continue
-          let categoryTitle = category.labels[0]
-          let dishTitle = util.getLabel(dish.title, user.language)
-          let price
-          try {
-            price = dish.prices[user.priceType].toFixed(2)
-          } catch(error) {
-            price = "?"
-          }
-          let additives = ""
-          if (dish.additives.length > 0 && dish.additives[0] != "") {
-            additives = ` (${dish.additives.join(",")})`
-          }
-          price = price.replace(".", ",")
-          text += `\n\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
+      let text = `*${util.getLabel(labels.dishes, user.language)} ${mensa} (${util.weekdayLabel(date)}, ${date}):*`
+      for (let category of categories) {
+        let dish = dishes.find(d => d.category == category._id)
+        if (!dish) continue
+        let categoryTitle = category.labels[0]
+        let dishTitle = util.getLabel(dish.title, user.language)
+        let price
+        try {
+          price = dish.prices[user.priceType].toFixed(2)
+        } catch(error) {
+          price = "?"
         }
-        inline_keyboard.push(keyboardBack)
-        return [{
-          text: text,
-          mode: util.editMode,
-          inline_keyboard
-        }]
-      })
+        let additives = ""
+        if (dish.additives.length > 0 && dish.additives[0] != "") {
+          additives = ` (${dish.additives.join(",")})`
+        }
+        price = price.replace(".", ",")
+        text += `\n\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
+      }
+      inline_keyboard.push(keyboardBack)
+      return [{
+        text: text,
+        mode: util.editMode,
+        inline_keyboard
+      }]
     }
   })
 }
