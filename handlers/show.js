@@ -76,7 +76,7 @@ function chooseDate({ db, user }, returnNext = false) {
         inline_keyboard.push([])
       }
       inline_keyboard[inline_keyboard.length - 1].push({
-        text: date == today ? util.getLabel(labels.today, user.language) : date,
+        text: date == today ? util.getLabel(labels.today, user.language) : `${util.weekdayLabel(date)}`,
         callback_data: "/show" + util.divider + date
       })
     }
@@ -115,7 +115,7 @@ function chooseMensa({ db, user }, date) {
       callback_data: "/menu"
     }])
     return [{
-      text: `${util.getLabel(labels.chooseMensa, user.language)} (${date})`,
+      text: `${util.getLabel(labels.chooseMensa, user.language)}\n(${util.weekdayLabel(date)}, ${date})`,
       mode: util.editMode,
       inline_keyboard
     }]
@@ -142,7 +142,7 @@ function showDishes({ db, user }, date, mensa) {
       }]
     } else {
       return db.collection("categories").find().sort({ order: 1 }).toArray().then(categories => {
-        let text = `*${util.getLabel(labels.dishes, user.language)} ${mensa} (${date}):*`
+        let text = `*${util.getLabel(labels.dishes, user.language)} ${mensa} (${util.weekdayLabel(date)}, ${date}):*`
         for (let category of categories) {
           let dish = dishes.find(d => d.category == category._id)
           if (!dish) continue
@@ -159,7 +159,7 @@ function showDishes({ db, user }, date, mensa) {
             additives = ` (${dish.additives.join(",")})`
           }
           price = price.replace(".", ",")
-          text += `\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
+          text += `\n\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
         }
         inline_keyboard.push(keyboardBack)
         return [{
