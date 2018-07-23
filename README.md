@@ -43,7 +43,8 @@ Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 - [x] `/settings` - change the language, price type, or enable/disable the bot
 - [x] `/show` - show dishes for a particular day
 - [ ] `/subscribe` - subscribe certain categories of dishes and get them every day
-  - [ ] basic subscribing and unsubscribing
+  - [x] basic subscribing and unsubscribing
+  - [ ] receive daily message with dishes
   - [ ] list all subscriptions
   - [ ] set time of day to get the message
   - [ ] choose days of the week
