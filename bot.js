@@ -5,6 +5,8 @@ const util = require("./util")
 const handlers = require("./handlers")
 const users = require("./lib/users")
 const api = require("./lib/api")
+const express = require("express")
+const bodyParser = require("body-parser")
 require("dotenv").config()
 
 const
@@ -16,7 +18,34 @@ const
   mongoAuthString = mongoUser ? `${mongoUser}:${mongoPass}@` : "",
   mongoConnectUrl = `mongodb://${mongoAuthString}${mongoUrl}:${mongoPort}`,
   telegramToken = process.env.TELEGRAM_TOKEN,
+  expressPort = process.env.EXPRESS_PORT || 8443
+
+let telegramWebhookUrl = process.env.TELEGRAM_WEBHOOK_URL
+let bot, app
+
+if (process.env.NODE_ENV == "production" && telegramWebhookUrl) {
+  console.log("Bot running in production mode")
+  // Use a weebhook through an express server
+  // Requires a working reverse proxy with a valid SSL certificate!
+  bot = new TelegramBot(telegramToken)
+  if (!telegramWebhookUrl.startsWith("https://")) {
+    telegramWebhookUrl = "https://" + telegramWebhookUrl
+  }
+  bot.setWebHook(`${telegramWebhookUrl}/bot${telegramToken}`)
+  app = express()
+  app.use(bodyParser.json())
+  app.post(`/bot${telegramToken}`, (req, res) => {
+    bot.processUpdate(req.body)
+    res.sendStatus(200)
+  })
+  // Start Express Server
+  app.listen(expressPort, () => {
+    console.log(`Express server is listening on ${expressPort}`)
+  })
+} else {
+  console.log("Bot running in development mode")
   bot = new TelegramBot(telegramToken, {polling: true})
+}
 
 let db, commandHandlers = {}
 for (let handler of handlers) {
