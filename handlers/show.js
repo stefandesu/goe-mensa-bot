@@ -163,5 +163,7 @@ function showDishes({ db, user, categories }, date, mensa) {
 
 module.exports = {
   handler,
-  commands: ["/show"]
+  commands: ["/show"],
+  chooseDate,
+  labels,
 }

@@ -1,10 +1,11 @@
 const TelegramBot = require("tgfancy")
 const mongoClient = require("mongodb").MongoClient
-// const schedule = require("node-schedule")
+const schedule = require("node-schedule")
 const util = require("./util")
 const handlers = require("./handlers")
 const users = require("./lib/users")
 const api = require("./lib/api")
+const subscriptions = require("./lib/subscriptions")
 const express = require("express")
 const bodyParser = require("body-parser")
 require("dotenv").config()
@@ -65,6 +66,18 @@ mongoClient.connect(mongoConnectUrl).then(database => {
   db = database.db(mongoDb)
   bot.onText(/.*/, mainHandler)
   bot.on("callback_query", callbackHandler)
+  // Schedule daily message
+  schedule.scheduleJob("0 8 * * 1,2,3,4,5", () => {
+    subscriptions.prepare(db).then(messages => {
+      console.log("Sending", messages.length, "messages...")
+      for (let { chat_id, text } of messages) {
+        let options = {
+          parse_mode: "Markdown",
+        }
+        bot.sendMessage(chat_id, text, options)
+      }
+    })
+  })
 }).catch(error => {
   console.log("Error:", error)
 })
