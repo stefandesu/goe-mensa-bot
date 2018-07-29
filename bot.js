@@ -19,7 +19,8 @@ const
   mongoAuthString = mongoUser ? `${mongoUser}:${mongoPass}@` : "",
   mongoConnectUrl = `mongodb://${mongoAuthString}${mongoUrl}:${mongoPort}`,
   telegramToken = process.env.TELEGRAM_TOKEN,
-  expressPort = process.env.EXPRESS_PORT || 8443
+  expressPort = process.env.EXPRESS_PORT || 8443,
+  adminUser = process.env.ADMIN_USER
 
 let telegramWebhookUrl = process.env.TELEGRAM_WEBHOOK_URL
 let bot, app
@@ -112,6 +113,8 @@ function callbackHandler({ data, message, fromMain }) {
       fromMain: fromMain ? true : false,
       mensen,
       categories,
+      bot,
+      adminUser,
     }
     // 3. Determine and run handler
     let handler = commandHandlers[command]

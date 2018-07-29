@@ -5,6 +5,7 @@ const subscribe = require("./subscribe")
 const show = require("./show")
 const favorites = require("./favorites")
 const help = require("./help")
+const admin = require("./admin")
 
 module.exports = [
   menu,
@@ -13,5 +14,6 @@ module.exports = [
   subscribe,
   show,
   favorites,
-  help
+  help,
+  admin,
 ]
