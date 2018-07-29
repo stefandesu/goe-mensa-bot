@@ -1,8 +1,6 @@
 # Göttingen Mensa Bot
 
-An upcoming Telegram bot for the canteens of the University of Göttingen. A older prototype is available as [@GoeMensaBot](https://t.me/GoeMensaBot), but will be completely rewritten using [goe-mensa-api](https://github.com/stefandesu/goe-mensa-api).
-
-Current tests are running on [@GoeMensaDevBot](https://t.me/GoeMensaDevBot), but it might not always be available.
+A Telegram bot for the canteens of the University of Göttingen. It is currently running as [@GoeMensaBot](https://t.me/GoeMensaBot), but it is still under development.
 
 ## Installation
 
@@ -44,7 +42,7 @@ Only `TELEGRAM_TOKEN` is required if everything else stays on default.
 - [x] `/show` - show dishes for a particular day
 - [ ] `/subscribe` - subscribe certain categories of dishes and get them every day
   - [x] basic subscribing and unsubscribing
-  - [ ] receive daily message with dishes
+  - [x] receive daily message with dishes
   - [ ] list all subscriptions
   - [ ] set time of day to get the message
   - [ ] choose days of the week
