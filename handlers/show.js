@@ -65,7 +65,17 @@ function chooseDate({ db, user }, returnNext = false) {
   // Get available dates from database
   return api.getDishes(db, query).then(results => {
     if (returnNext && results.length) {
-      return results[0].date
+      // If it's already after 7 PM, return the next date
+      let currentDate = results[0].date
+      if ((new Date()).getHours() >= 19) {
+        for (let result of results) {
+          // FIXME: This might return the wrong date.
+          if (result.date > currentDate) {
+            return result.date
+          }
+        }
+      }
+      return currentDate
     }
     let dateSet = new Set([])
     for (let result of results) {
