@@ -42,7 +42,7 @@ function chooseMensa({ mensen, user }) {
 
 function chooseCategory({ categories, user }, mensa) {
   let relevantCategories = categories.filter(c => c.mensa == mensa)
-  let inline_keyboard = api.categoriesToKeyboard(relevantCategories, "/subscribe" + util.divider + mensa, user)
+  let inline_keyboard = api.categoriesToKeyboard(relevantCategories, "/subscribe" + util.divider + mensa, user, true)
   inline_keyboard.push([
     {
       text: util.getLabel(util.backText, user.language),
