@@ -1,5 +1,7 @@
 # Göttingen Mensa Bot
 
+[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m781866919-2035cabaabfb29a4f73f4896.svg?label=Bot)](https://stats.uptimerobot.com/vZQ21igKB)
+
 A Telegram bot for the canteens of the University of Göttingen. It is currently running as [@GoeMensaBot](https://t.me/GoeMensaBot), but it is still under development.
 
 ## Installation
