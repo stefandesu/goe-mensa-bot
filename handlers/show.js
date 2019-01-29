@@ -152,14 +152,14 @@ function showDishes({ db, user, categories }, date, mensa) {
         try {
           price = dish.prices[user.priceType].toFixed(2)
         } catch(error) {
-          price = "?"
+          price = NaN
         }
         let additives = ""
         if (dish.additives.length > 0 && dish.additives[0] != "") {
           additives = ` (${dish.additives.join(",")})`
         }
         price = price.replace(".", ",")
-        text += `\n\n*${categoryTitle}:* ${dishTitle}${additives} (${price} €)`
+        text += `\n\n*${categoryTitle}:* ${dishTitle}${additives}` + (!isNaN(price) ? ` (${price} €)` : "")
       }
       inline_keyboard.push(keyboardBack)
       return [{
