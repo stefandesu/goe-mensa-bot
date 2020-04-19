@@ -38,7 +38,7 @@ function handler(meta, date, mensa) {
       if (date) {
         return chooseMensa(meta, date)
       } else {
-        return showNoDateError()
+        return showNoDateError(meta)
       }
     })
   }
@@ -177,7 +177,7 @@ function showDishes({ db, user, categories }, date, mensa) {
   })
 }
 
-function showNoDateError() {
+function showNoDateError({ user }) {
   const inline_keyboard = []
   inline_keyboard.push([
     {
