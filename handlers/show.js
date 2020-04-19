@@ -25,6 +25,10 @@ const labels = {
   dishes: {
     de: "Gerichte für",
     en: "Dishes for"
+  },
+  noData: {
+    de: "Sorry, keine Daten vorhanden.",
+    en: "Sorry, no data there."
   }
 }
 
@@ -34,7 +38,7 @@ function handler(meta, date, mensa) {
       if (date) {
         return chooseMensa(meta, date)
       } else {
-        // TODO: Show error
+        return showNoDateError()
       }
     })
   }
@@ -76,6 +80,8 @@ function chooseDate({ db, user }, returnNext = false) {
         }
       }
       return currentDate
+    } else if (returnNext) {
+      return null
     }
     let dateSet = new Set([])
     for (let result of results) {
@@ -169,6 +175,22 @@ function showDishes({ db, user, categories }, date, mensa) {
       }]
     }
   })
+}
+
+function showNoDateError() {
+  const inline_keyboard = []
+  inline_keyboard.push([
+    {
+      text: util.getLabel(util.backText, user.language),
+      callback_data: "/menu"
+    }
+  ])
+  const text = `${util.getLabel(labels.noData, user.language)}`
+  return [{
+    text: text,
+    mode: util.editMode,
+    inline_keyboard
+  }]
 }
 
 module.exports = {
